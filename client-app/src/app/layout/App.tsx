@@ -4,6 +4,7 @@ import { Activity } from '../models/activity';
 import NavBar from './NavBar';
 import {Container} from 'semantic-ui-react'
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import {v4 as uuid} from 'uuid';
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
   function handleCreateOrEditActivity(activity: Activity){
     activity.id 
       ? setActivities([...activities.filter(x => x.id !== activity.id), activity]) // if we have an activity
-      : setActivities([...activities, activity]); //if we not
+      : setActivities([...activities, {...activity, id: uuid()}]); //if we not
       setEditMode(false)
       setSelectedActivity(activity);
   }

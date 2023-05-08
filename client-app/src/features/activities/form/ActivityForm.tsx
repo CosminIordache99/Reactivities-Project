@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import { Button, Form, Segment } from "semantic-ui-react";
 import { Activity } from "../../../app/models/activity";
-import { act } from "@testing-library/react";
 
 interface Props {
     activity: Activity | undefined;
