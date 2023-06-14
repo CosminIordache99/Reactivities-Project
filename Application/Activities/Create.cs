@@ -30,7 +30,7 @@ namespace Application.Activities
             }
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
-                _context.Add(request.Activity);
+                _context.Activities.Add(request.Activity);
                 var result = await _context.SaveChangesAsync() > 0; // if is greater than 0, result is true else false
 
                 if(!result) return Result<Unit>.Failure("Failed to creare activity");

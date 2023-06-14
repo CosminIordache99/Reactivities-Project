@@ -18,6 +18,12 @@ export default observer(function ActivityList () {
                 {activities.map(activity => (
                     <ActivityListItem key={activity.id} activity={activity}/>
                 ))}
+                {/* {activities.map((activity) => (
+                    <ActivityListItem
+                    key={`${group}-${activity.id}`} // Unique key by concatenating group and activity id
+                    activity={activity}
+                    />
+                ))} */}
             </Fragment>
         ))}
     </>

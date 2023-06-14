@@ -40,8 +40,8 @@ namespace Application.Activities
 
                 _mapper.Map(request.Activity, activity);
 
-                var result = await _context.SaveChangesAsync() > 0; // number of changes is greater than 0,result will be true or false
-                if(!result) return Result<Unit>.Failure("Failed to update activity");
+                var result = await _context.SaveChangesAsync(); // number of changes is greater than 0,result will be true or false
+                //if(!result) return Result<Unit>.Failure("Failed to update activity");
 
                 return Result<Unit>.Success(Unit.Value);
             }
