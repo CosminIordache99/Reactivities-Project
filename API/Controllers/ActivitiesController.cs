@@ -1,6 +1,7 @@
 using Application.Activities;
 using Domain;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,8 +14,9 @@ namespace API.Controllers
             return HandleResult(await Mediator.Send(new List.Query()));
         }
 
+        //[Authorize] as we implement policy in program.cs, we no need anymore decorate
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetActivity(Guid id)
+        public async Task<ActionResult<Activity>> GetActivity(Guid id)
         {
             return HandleResult(await Mediator.Send(new Details.Query{Id = id}));
         }
