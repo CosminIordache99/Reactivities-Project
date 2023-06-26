@@ -1,6 +1,8 @@
-namespace Domain
+using System.Collections.Generic;
+
+namespace Application.Activities
 {
-    public class Activity
+    public class ActivityDto // this was create to resolve the object cycle, when EF try to load data
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -9,6 +11,7 @@ namespace Domain
         public string Category {get; set;}
         public string City { get; set; }
         public string Venue {get; set;}
-        public ICollection<ActivityAttendee> Attendees {get; set;} = new List<ActivityAttendee> ();
+        public string HostUsername { get; set; }
+        public ICollection<Profiles> Attendees { get; set; }     
     }
 }
