@@ -1,5 +1,6 @@
 using Application.Core;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -27,13 +28,10 @@ namespace Application.Activities
             public async Task<Result<List<ActivityDto>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var activities = await _context.Activities
-                    .Include(a => a.Attendees) //{
-                    .ThenInclude(u => u.AppUser) // this implementation is bcs EF don t return related data, !Attendes user list 
-                    .ToListAsync(cancellationToken); // }
-
-                var activitiesToReturn = _mapper.Map<List<ActivityDto>>(activities);    
+                    .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider)
+                    .ToListAsync(cancellationToken);
                 
-                return Result<List<ActivityDto>>.Success(activitiesToReturn);
+                return Result<List<ActivityDto>>.Success(activities);
             }
         }
     }
