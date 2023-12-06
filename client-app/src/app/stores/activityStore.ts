@@ -160,7 +160,7 @@ export default class ActivityStore {
         }
     }
 
-     cancelActivityToogle = async () => {
+    cancelActivityToogle = async () => {
         this.loading = true;
         try {
             await agent.Activities.attend(this.selectedActivity!.id);
@@ -174,4 +174,8 @@ export default class ActivityStore {
             runInAction(() => this.loading = false);
         }
      }
+
+    clearSelectedActivity = () => {
+        this.selectedActivity = undefined;
+    }
 }
