@@ -10,25 +10,25 @@ import { observer } from "mobx-react-lite";
 export default observer( function ProfilePage () {
     const {username} = useParams<{username: string}>();
     const {profileStore} = useStore();
-    const {loadingProfile,loadprofile,profile} = profileStore
+    const {loadingProfile,loadprofile,profile, setActiveTab} = profileStore
 
     useEffect(() => {
-        if(username)
-            loadprofile(username);
+        if(username) loadprofile(username);
+        return () => {
+            setActiveTab(0);
+        }
     },[loadprofile, username])
 
     if(loadingProfile) return <LoadingComponent content="Loading profile ..." />
 
+    if (!profile) return <h2>Problem loading profile</h2>
+
     return (
-        <Segment>
-            <Grid.Column width={16}>
-            {profile &&
-                <>
-                <ProfileHeader profile={profile} />
+        <Grid>
+            <Grid.Column width='16'>
+                <ProfileHeader profile={profile}/>
                 <ProfileContent profile={profile} />
-                </>
-            }
             </Grid.Column>
-        </Segment>
+        </Grid>
     )
 })
